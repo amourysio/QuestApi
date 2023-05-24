@@ -1,0 +1,5 @@
+edu\itstep\question\MainApplicationTests.class
+edu\itstep\question\quest\controller\QuestControllerTest.class
+edu\itstep\question\quest\repository\QuestRepositoryTest.class
+edu\itstep\question\quest\service\QuestServiceTest.class
+edu\itstep\question\quest\entity\QuestTest.class

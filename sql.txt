@@ -1,0 +1,8 @@
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (3, '024 bit is equal to how many byte', ARRAY ['1 Byte','32 Byte','64 Byte'],'128 Byte','Intern');
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (4, 'Which one programming language is exclusively used for artificial intelligence', ARRAY ['Java','J2EE','C'],'Prolog','Intern');
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (5, 'First computer virus is known as', ARRAY ['Elk Cloner','SCA Virus','Rabbit'],'Creeper Virus','Intern');
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (6, 'Firewall in computer is used for', ARRAY ['Data Transmission','Authentication','Monitoring'],'Security','Intern');
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (7, 'A dual layer Blue-ray Disc can store data upto', ARRAY ['20GB','30GB','40GB'],'50GB','Intern');
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (8, 'Which of the following is not an operating system', ARRAY ['Linux','DOS','Mac'],'C','Intern');
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (9, 'Which of the following is not a database management software', ARRAY ['MySQL','Oracle','Sybase'],'COBOL','Intern');
+INSERT INTO quest (id, question, incorrect_answers, correct_answer, difficulty) VALUES (10, 'Number of layers in the OSI (Open Systems Interconnection) Model', ARRAY ['9','11','3'],'7','Intern');
