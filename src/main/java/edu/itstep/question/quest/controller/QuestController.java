@@ -4,7 +4,6 @@ import edu.itstep.question.quest.exception.QuestNotFoundException;
 import edu.itstep.question.quest.service.QuestService;
 import edu.itstep.question.quest.entity.Quest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +11,7 @@ import java.util.Optional;
 @RequestMapping(path = "api/v1")
 @RestController
 @AllArgsConstructor
+@CrossOrigin("http://localhost:3000")
 public class QuestController {
     private final QuestService questService;
 
@@ -21,11 +21,11 @@ public class QuestController {
     @PostMapping(path = "/questions")
     public void registerNewQuest(@RequestBody Quest quest) { questService.addNewQuest(quest); }
 
-    @GetMapping("/questions/id/{id}")
+    @GetMapping("/questions/{id}")
     public Optional<Quest> getQuestById(@PathVariable Long id){
         return Optional.ofNullable(questService.getQuestById(id).orElseThrow(() -> new QuestNotFoundException(id)));
     }
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = "/questions/{id}")
     public void deleteQuest(@PathVariable("id") Long id){
         questService.deleteQuest(id);
     }

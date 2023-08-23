@@ -14,10 +14,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
@@ -83,22 +85,30 @@ class QuestControllerTest {
 
     @Test
     void getQuestById() throws Exception {
-        Long questId = 1L;
-        when(underTest.getQuestById(questId)).thenReturn(Optional.of(quest));
-        mockMvc.perform(get(API_V1_URL+QUESTIONS_URL+ID_URL,1L)
-                        .contentType(MediaType.APPLICATION_JSON))
+        Quest quest = new Quest(1L, "Question", Arrays.asList("Answer1", "Answer2"), "CorrectAnswer", "Easy");
+        String link = API_V1_URL + QUESTIONS_URL + "/1";
+        when(underTest.getQuestById(1L)).thenReturn(Optional.of(quest));
+
+        mockMvc.perform(get(link))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1L));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(quest.getId()))
+                .andExpect(jsonPath("$.question").value(quest.getQuestion()))
+                .andExpect(jsonPath("$.correctAnswer").value(quest.getCorrectAnswer()))
+                .andExpect(jsonPath("$.difficulty").value(quest.getDifficulty()));
+
     }
 
     @Test
-    void deleteQuest() throws Exception {
-        Long deleteId = 1L;
-        doNothing().when(underTest).deleteQuest(deleteId);
-        mockMvc.perform(delete(API_V1_URL+"/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(quest)))
-                .andExpect(status().isOk());
+    public void deleteQuest() throws Exception {
+        Long questId = 1L;
+
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(API_V1_URL+ QUESTIONS_URL+"/{id}", questId))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        verify(underTest, times(1)).deleteQuest(questId);
+        verifyNoMoreInteractions(underTest);
     }
 
     @Test

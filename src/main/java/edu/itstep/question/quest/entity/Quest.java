@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-@Table
+@Table(name="Quest")
 @Entity
 @AllArgsConstructor
 @ToString

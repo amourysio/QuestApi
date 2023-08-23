@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -63,14 +64,14 @@ class QuestServiceTest {
         assertThat(questReturn).isNotNull();
     }
 
-
     @Test
-    @Disabled
     void deleteQuest() {
-        // Still Doesn't work, I don't know where is problem here!
-        underTest.addNewQuest(quest);
-        verify(questRepository,times(0)).delete(quest);
+        // Mocking repository behavior
+        when(questRepository.existsById(1L)).thenReturn(true);
 
+        // Testing the service method
+        assertDoesNotThrow(() -> underTest.deleteQuest(1L));
+        verify(questRepository, times(1)).deleteById(1L);
     }
     @Test
     void willThrowWhenIdIsTaken() {
